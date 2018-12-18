@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{trick.getName()}}{% endblock %}
+
+{% block body %}
+	<h1>trick id = {{post}} </h1>
+	<p>{{trick.getName()}}</p>
+	<p>{{trick.getDescription()}}</p>
+{% endblock %}
