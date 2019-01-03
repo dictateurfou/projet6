@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace SnowTrick\TrickBundle\Entity;
 
+use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @ORM\Entity(repositoryClass="SnowTrick\TrickBundle\Repository\TrickRepository")
  */
 class Trick
 {
@@ -27,10 +28,10 @@ class Trick
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    private $categorie;
 
     /**
      * @ORM\Column(type="json")
@@ -41,6 +42,7 @@ class Trick
      * @ORM\Column(type="json")
      */
     private $videoList = [];
+
 
     public function getId(): ?int
     {
@@ -71,14 +73,14 @@ class Trick
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategorie(): ?Category
     {
-        return $this->category;
+        return $this->categorie;
     }
 
-    public function setCategory(?Category $category): self
+    public function setCategorie(?Category $categorie): self
     {
-        $this->category = $category;
+        $this->categorie = $categorie;
 
         return $this;
     }
@@ -106,4 +108,8 @@ class Trick
 
         return $this;
     }
+
+
+
+
 }

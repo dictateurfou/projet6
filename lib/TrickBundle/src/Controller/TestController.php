@@ -1,31 +1,20 @@
 <?php
 
 // src/Controller/HelloController.php
-namespace App\Controller;
+namespace SnowTrick\TrickBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use SnowTrick\TrickBundle\Entity\Trick;
-use App\Entity\Category;
+use App\Entity\Trick;
 
-class HomeController extends AbstractController
+class TestController extends AbstractController
 {
-    /**
-     * Page d'accueil
-     *
-     * @Route("/", name="accueil")
-     */
-    public function home()
-    {
-        $test = new \SnowTrick\TrickBundle\TrickBundle();
-        $test->test();
-        return $this->render('home.html.twig', []);
-    }
+
 
     /**
      * Page d'info d'un trick
      *
-     * @Route("/trick/{trickId}", name="trick")
+     * @Route("/test/{trickId}", name="trick")
      */
     public function showTrick($trickId)
     {

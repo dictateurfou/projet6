@@ -40,7 +40,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "SnowTrick\\TrickBundle\\" : "lib/TrickBundle/"
         }
     },
     "autoload-dev": {

@@ -38,14 +38,10 @@ class User
      */
     private $avatar;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Discussion", mappedBy="author")
-     */
-    private $discussions;
 
     public function __construct()
     {
-        $this->discussions = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -101,34 +97,5 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection|Discussion[]
-     */
-    public function getDiscussions(): Collection
-    {
-        return $this->discussions;
-    }
 
-    public function addDiscussion(Discussion $discussion): self
-    {
-        if (!$this->discussions->contains($discussion)) {
-            $this->discussions[] = $discussion;
-            $discussion->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDiscussion(Discussion $discussion): self
-    {
-        if ($this->discussions->contains($discussion)) {
-            $this->discussions->removeElement($discussion);
-            // set the owning side to null (unless already changed)
-            if ($discussion->getAuthor() === $this) {
-                $discussion->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
 }
