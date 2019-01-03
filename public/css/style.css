@@ -1,3 +1,21 @@
 h1{
 	color:red;
 }
+
+#registerForm{
+	width:20em;
+	margin:0 auto;
+	background-color:black;
+	text-align:center;
+}
+
+#registerForm label{
+	width:100%;
+	display:block;
+	text-align:center;
+	color:#fff;
+}
+
+#registerForm input{
+	text-align:center;
+}

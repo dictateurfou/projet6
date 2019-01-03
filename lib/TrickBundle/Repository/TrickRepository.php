@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace SnowTrick\TrickBundle\Repository;
 
-use App\Entity\Trick;
+use SnowTrick\TrickBundle\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
