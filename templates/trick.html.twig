@@ -4,5 +4,6 @@
 {% block body %}
 	<h1>trick id = {{post}} </h1>
 	<p>{{trick.getName()}}</p>
-
+	<p>{{trick.getDescription()}}</p>
+	<p> categorie :{{trick.getCategorie().getName()}}</p>
 {% endblock %}
