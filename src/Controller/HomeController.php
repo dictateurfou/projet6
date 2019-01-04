@@ -37,6 +37,6 @@ class HomeController extends AbstractController
             return $this->redirectToRoute("accueil");
         }
 
-        return $this->render('trick.html.twig', ['post' => $trickId,'trick' => $trick]);
+        return $this->render('trick.html.twig', ['trickId' => $trickId,'trick' => $trick]);
     }
 }

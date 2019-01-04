@@ -43,6 +43,21 @@ class Trick
      */
     private $videoList = [];
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $edited;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $edited_at;
+
 
     public function getId(): ?int
     {
@@ -105,6 +120,42 @@ class Trick
     public function setVideoList(array $videoList): self
     {
         $this->videoList = $videoList;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getEdited(): ?string
+    {
+        return $this->edited;
+    }
+
+    public function setEdited(string $edited): self
+    {
+        $this->edited = $edited;
+
+        return $this;
+    }
+
+    public function getEditedAt(): ?\DateTimeInterface
+    {
+        return $this->edited_at;
+    }
+
+    public function setEditedAt(\DateTimeInterface $edited_at): self
+    {
+        $this->edited_at = $edited_at;
 
         return $this;
     }

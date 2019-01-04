@@ -19,3 +19,72 @@ h1{
 #registerForm input{
 	text-align:center;
 }
+
+#trick-content{
+	text-align:center;
+	width:65%;
+	margin:0 auto;
+	border:1px solid black;
+}
+
+#trick-img-header{
+	width:100%;
+	
+}
+#trick-header{
+	position:relative;
+}
+
+#trick-header-title{
+	width:100%;
+	text-align:center;
+	color:black;
+	position:absolute;
+	top: calc(50% - 1.5em);
+	font-size:5em;
+}
+
+#trick-media embed{
+	width:24%;
+	height:10em;
+	}
+
+#trick-media img{
+	width:24%;
+	height:10em;
+
+}
+
+#trick-description{
+	margin:0 auto;
+	margin-top:1em;
+	width:70%;
+}
+
+
+#trick-additionalInfo ul{
+	list-style: none;
+	width:100%;
+}
+
+#trick-additionalInfo ul li{
+	display: inline-block;
+	border:1px solid black;
+	padding:0.3em 0.8em;
+	border-radius:10px;
+	font-size:1.2em;
+}
+
+#trick-description{
+	font-size:1.3em;
+}
+
+.trick-group{
+	background-color:green;
+	color:#fff;
+}
+
+.trick-date{
+	background-color:blue;
+	color:#fff;
+}
