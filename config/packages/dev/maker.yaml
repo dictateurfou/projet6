@@ -1,3 +1,4 @@
 # config/packages/dev/maker.yaml
-maker:
-    root_namespace: 'SnowTrick\TrickBundle'
+#maker:
+#    root_namespace: 'SnowTrick\TrickBundle'
+#uncomment this for make in bundle
