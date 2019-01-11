@@ -31,7 +31,7 @@ class Trick
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $categorie;
+    private $category;
 
     /**
      * @ORM\Column(type="json")
@@ -88,14 +88,14 @@ class Trick
         return $this;
     }
 
-    public function getCategorie(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->categorie;
+        return $this->category;
     }
 
-    public function setCategorie(?Category $categorie): self
+    public function setCategory(?Category $category): self
     {
-        $this->categorie = $categorie;
+        $this->category = $category;
 
         return $this;
     }
