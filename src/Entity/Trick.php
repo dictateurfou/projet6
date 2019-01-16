@@ -1,12 +1,11 @@
 <?php
 
-namespace SnowTrick\TrickBundle\Entity;
+namespace App\Entity;
 
-use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="SnowTrick\TrickBundle\Repository\TrickRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  */
 class Trick
 {
@@ -57,7 +56,6 @@ class Trick
      * @ORM\Column(type="datetime")
      */
     private $edited_at;
-
 
     public function getId(): ?int
     {
@@ -159,8 +157,4 @@ class Trick
 
         return $this;
     }
-
-
-
-
 }

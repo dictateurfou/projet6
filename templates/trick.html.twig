@@ -9,12 +9,12 @@
 		</section>
 		<section id="trick-media">
 			{% for video in trick.getVideoList() %}
-	        	<embed type="video/webm" src="{{video}}" />
+	        	<embed type="video/webm" src="{{video}}"/>
 	    	{% endfor %}
 
 
 			{% for image in trick.getImageList() %}
-	        	<img src="{{asset('images/'~ image ~'')}}" />
+	        	<img src="{{asset('uploads/trick/'~ image ~'')}}" />
 	    	{% endfor %}
 	    </section>
 

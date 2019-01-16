@@ -5,14 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use SnowTrick\TrickBundle\Entity\Trick;
-use App\Entity\Category;
+
+use App\Entity\Trick;
+use App\Form\TrickType;
+use App\Service\ImageUploader;
+use App\Service\VideoLinkValidator;
 
 /** @Route("/trick", name="blog_") */
 class TrickController extends AbstractController
@@ -42,35 +39,27 @@ class TrickController extends AbstractController
      *
      * @Route("/add", name="add trick")
      */
-    public function addTrick(Request $request){
+    public function addTrick(Request $request,ImageUploader $fileUploader,VideoLinkValidator $videoLinkvalidator){
+        $entityManager = $this->getDoctrine()->getManager();
         $trick = new Trick();
-        $categoryList = $this->getDoctrine()
-        ->getRepository(Category::class)
-        ->findAll();
-        $form = $this->createFormBuilder($trick)
-        ->add('name', TextType::class,array('label' => "Nom"))
-        ->add('description', TextareaType::class,array('label' => "Description"))
-        ->add('category', EntityType::class, array('class' => Category::class,
-            'choices' => $categoryList,'choice_label' => 'getName',
-            'placeholder' => 'Categorie','label' => 'Categorie'))
-        ->add('videoList', CollectionType::class, array(
-            'entry_type' => TextType::class,
-            'allow_add' => true,
-            'allow_delete' => true,
-            'required'      => true,       
-            'prototype' => true,
-            'entry_options' => array(
-                'attr' => array('class' => 'videoList-box'),
-            ),
-        ))
-        ->add('valider', SubmitType::class, array('label' => 'Valider'))
-        ->getForm();
-
+        $date = new \DateTime();
+        $date->format('Y-m-d H:i:s');
+        
+        $trick->setEditedAt($date);
+        $trick->setCreatedAt($date);
+        $trick->setImageList(array(""));
+        $trick->setVideoList(array(""));
+        $trick->setEdited("no");
+        $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $trick->getImageList();
             $data = $form->getData();
-            var_dump($data);
+            $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
+            $trick->setImageList($fileUploader->upload($file));
+            $entityManager->persist($trick);
+            $entityManager->flush();
+            
         }
         return $this->render('trick/add.html.twig', ['form' => $form->createView()]);
     }

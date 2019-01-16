@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-
+    trick_image_directory: '%kernel.project_dir%/public/uploads/trick'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -29,6 +29,10 @@ services:
         resource: '../lib/TrickBundle/Repository'
         autowire: true
         tags: ['doctrine.repository_service']
+
+    App\Service\ImageUploader:
+        arguments:
+            $targetDirectory: '%trick_image_directory%'
 
 
     # add more service definitions when explicit configuration is needed
