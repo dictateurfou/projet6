@@ -4,6 +4,7 @@ namespace App\Service;
 class VideoLinkValidator{
 	const YOUTUBEURL = ["youtube.com","youtu.be"];
 	const EMBEDYOUTUBEURLBASE = "https://www.youtube.com/embed/";
+	const EMBEDDAILYMOTIONBASE = "https://www.dailymotion.com/embed/video/";
 	const DAILYMOTIONURL = ["dailymotion.com","dai.ly"];
 	const AVAILABLEURL = ["youtube" => self::YOUTUBEURL,"dailymotion" => self::DAILYMOTIONURL];
 
@@ -19,7 +20,7 @@ class VideoLinkValidator{
 		return $finalList;
 	}
 
-	private function checkEmbedYoutube($url){
+	private function checkEmbed($url){
 		$embed = false;
 		if(strpos($url,"embed") == true){
 			$embed = true;
@@ -55,6 +56,30 @@ class VideoLinkValidator{
 		
 	}
 
+	private function convertDailymotionUrl($url){
+		var_dump("passe");
+		$linkExplode = explode('/',$url);
+		$video = $linkExplode[count($linkExplode) - 1];
+		
+
+		//if contain query argument (playlist)
+		if(parse_url($url, PHP_URL_QUERY) !== NULL){
+			var_dump("argument");
+			$video = explode('?',$video)[0];
+		}
+		$videoLink = self::EMBEDDAILYMOTIONBASE.$video;
+		/*invalid url*/
+		if(count($linkExplode) == 1){
+			$videoLink = false;
+		}
+		if($videoLink == false){
+			return false;
+		}
+		else{
+			return $videoLink;
+		}
+	}
+
 	private function checkValidUrl($url){
 		$result = false;
 		$i = 0;
@@ -63,10 +88,15 @@ class VideoLinkValidator{
 			while(count(self::AVAILABLEURL[$key]) > $e){
 				if(strpos($url, self::AVAILABLEURL[$key][$e])){
 					$result = $url;
+					$embed = $this->checkEmbed($url);
 					if($key == "youtube"){
-						$embed = $this->checkEmbedYoutube($url);
 						if($embed == false){
 							$result = $this->convertYoutubeUrl($url);
+						}
+					}
+					else if($key == "dailymotion"){
+						if($embed == false){
+							$result = $this->convertDailymotionUrl($url);
 						}
 					}
 					break;
