@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\AccountValidation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,5 +33,20 @@ class SecurityController extends AbstractController
     {
         // controller can be blank: it will never be executed!
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
+    }
+
+
+
+     /**
+     * @Route("/accountValidation/{token}", name="app_valid_account")
+     */
+    public function validAccount($token)
+    {
+
+        $accountValidation = $this->getDoctrine()
+        ->getRepository(AccountValidation::class)
+        ->findBy(array('token' => $token));
+        //->findBy(array('token' => $token));
+        dd($accountValidation);
     }
 }

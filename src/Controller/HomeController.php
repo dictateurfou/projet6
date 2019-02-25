@@ -20,6 +20,7 @@ class HomeController extends AbstractController
     {
         $test = new \SnowTrick\TrickBundle\TrickBundle();
         $test->test();
+
         return $this->render('home.html.twig', []);
     }
 
