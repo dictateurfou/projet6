@@ -57,14 +57,14 @@ class VideoLinkValidator{
 	}
 
 	private function convertDailymotionUrl($url){
-		var_dump("passe");
+
 		$linkExplode = explode('/',$url);
 		$video = $linkExplode[count($linkExplode) - 1];
 		
 
 		//if contain query argument (playlist)
 		if(parse_url($url, PHP_URL_QUERY) !== NULL){
-			var_dump("argument");
+
 			$video = explode('?',$video)[0];
 		}
 		$videoLink = self::EMBEDDAILYMOTIONBASE.$video;

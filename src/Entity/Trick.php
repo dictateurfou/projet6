@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,10 +34,6 @@ class Trick
      */
     private $category;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $imageList = [];
 
     /**
      * @ORM\Column(type="json")
@@ -56,6 +54,16 @@ class Trick
      * @ORM\Column(type="datetime")
      */
     private $edited_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick",cascade={"persist","remove"})
+     */
+    private $imageList;
+
+    public function __construct()
+    {
+        $this->imageList = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -98,17 +106,7 @@ class Trick
         return $this;
     }
 
-    public function getImageList(): ?array
-    {
-        return $this->imageList;
-    }
 
-    public function setImageList(array $imageList): self
-    {
-        $this->imageList = $imageList;
-
-        return $this;
-    }
 
     public function getVideoList(): ?array
     {
@@ -154,6 +152,37 @@ class Trick
     public function setEditedAt(\DateTimeInterface $edited_at): self
     {
         $this->edited_at = $edited_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImageList(): Collection
+    {
+        return $this->imageList;
+    }
+
+    public function addImageList(Image $imageList): self
+    {
+        if (!$this->imageList->contains($imageList)) {
+            $this->imageList[] = $imageList;
+            $imageList->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageList(Image $imageList): self
+    {
+        if ($this->imageList->contains($imageList)) {
+            $this->imageList->removeElement($imageList);
+            // set the owning side to null (unless already changed)
+            if ($imageList->getTrick() === $this) {
+                $imageList->setTrick(null);
+            }
+        }
 
         return $this;
     }

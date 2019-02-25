@@ -15,8 +15,7 @@ final class Version20190103035026 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE trick (id INT AUTO_INCREMENT NOT NULL, category_id INT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, image_list JSON NOT NULL, video_list JSON NOT NULL, INDEX IDX_D8F0A91EBCF5E72D (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE trick ADD CONSTRAINT FK_D8F0A91EBCF5E72D FOREIGN KEY (category_id) REFERENCES category (id)');
+        
     }
 
     public function down(Schema $schema) : void
@@ -24,6 +23,6 @@ final class Version20190103035026 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE trick');
+   
     }
 }

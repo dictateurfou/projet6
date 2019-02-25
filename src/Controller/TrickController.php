@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Trick;
+use App\Entity\Image;
 use App\Form\TrickType;
 use App\Service\ImageUploader;
 use App\Service\VideoLinkValidator;
@@ -44,10 +45,10 @@ class TrickController extends AbstractController
         $trick = new Trick();
         $date = new \DateTime();
         $date->format('Y-m-d H:i:s');
-        
+        $image = new Image();
+        $trick->addImageList($image);
         $trick->setEditedAt($date);
         $trick->setCreatedAt($date);
-        $trick->setImageList(array(""));
         $trick->setVideoList(array(""));
         $trick->setEdited("no");
         $form = $this->createForm(TrickType::class, $trick);
@@ -56,11 +57,39 @@ class TrickController extends AbstractController
             $file = $trick->getImageList();
             $data = $form->getData();
             $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
-            $trick->setImageList($fileUploader->upload($file));
+            $fileUploader->upload($trick->getImageList());
             $entityManager->persist($trick);
+           
             $entityManager->flush();
             
         }
         return $this->render('trick/add.html.twig', ['form' => $form->createView()]);
     }
+
+
+    /**
+    * Page d'ajout d'un trick
+    *
+    * @Route("/edit/{trick}", name="add trick")
+    */
+    public function editTrick(Request $request,ImageUploader $fileUploader,VideoLinkValidator $videoLinkvalidator,Trick $trick){
+        $entityManager = $this->getDoctrine()->getManager();
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $fileUploader->uploadEdit($trick);
+            $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
+            $entityManager->persist($trick);
+            $trick->setEdited("yes");
+            $date = new \DateTime();
+            $date->format('Y-m-d H:i:s');
+            $trick->setEditedAt($date);
+            $entityManager->flush();
+        }
+        return $this->render('trick/edit.html.twig', ['form' => $form->createView()]);
+    }
+
+
 }

@@ -26,15 +26,14 @@ class TrickType extends AbstractType
                 'choice_label' => 'getName',
                 'placeholder' => 'Categorie','label' => 'Categorie'))
             ->add('imageList', CollectionType::class, array(
-                'entry_type' => FileType::class,
+                'entry_type' => ImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'required'      => true,
                 'prototype' => true,
                 'label' => false,
+                'by_reference' => false,
                 'entry_options' => array(
-                    'multiple' => true,
-                    'attr' => array('class' => 'imageList-box', 'accept' => 'image/*',),
+                    'attr' => array('class' => 'imageList-box', 'accept' => 'image/*'),
 
                 ),
             ))

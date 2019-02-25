@@ -25,10 +25,10 @@ services:
         tags: ['controller.service_arguments']
 
 
-    SnowTrick\TrickBundle\Repository\:
-        resource: '../lib/TrickBundle/Repository'
-        autowire: true
-        tags: ['doctrine.repository_service']
+    #SnowTrick\TrickBundle\Repository\:
+    #    resource: '../lib/TrickBundle/Repository'
+    #    autowire: true
+    #    tags: ['doctrine.repository_service']
 
     App\Service\ImageUploader:
         arguments:

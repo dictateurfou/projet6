@@ -14,7 +14,7 @@
 
 
 			{% for image in trick.getImageList() %}
-	        	<img src="{{asset('uploads/trick/'~ image ~'')}}" />
+	        	<img src="{{asset('uploads/trick/'~ image.getName() ~'')}}" />
 	    	{% endfor %}
 	    </section>
 

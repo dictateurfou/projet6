@@ -88,3 +88,37 @@ h1{
 	background-color:blue;
 	color:#fff;
 }
+
+#form-edit{
+	text-align:center;
+	margin:0 auto;
+	width:70%;
+}
+
+#form-edit ul{
+	list-style: none;
+	list-style-type: none;
+}
+
+#form-edit li{
+	display: inline-block;
+	width:20%;
+	border:1px solid black;
+	padding:0.3em 0.8em;
+	border-radius:10px;
+	font-size:1.2em;
+}
+
+.media-action{
+	display:inline-block;
+	width:20%;
+
+}
+
+.media-action.edit:hover{
+	background-color:green;
+}
+
+.media-action.delete:hover{
+	background-color:red;
+}
