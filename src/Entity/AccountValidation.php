@@ -17,7 +17,7 @@ class AccountValidation
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"},fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $User;

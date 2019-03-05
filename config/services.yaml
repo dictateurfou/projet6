@@ -30,9 +30,9 @@ services:
     #    autowire: true
     #    tags: ['doctrine.repository_service']
 
-    App\Service\ImageUploader:
-        arguments:
-            $targetDirectory: '%trick_image_directory%'
+    #App\Entity\Image:
+    #    arguments:
+    #        $targetDirectory: '%trick_image_directory%'
 
 
     # add more service definitions when explicit configuration is needed

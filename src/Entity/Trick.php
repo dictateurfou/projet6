@@ -60,9 +60,15 @@ class Trick
      */
     private $imageList;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Discussion", mappedBy="trick")
+     */
+    private $discussions;
+
     public function __construct()
     {
         $this->imageList = new ArrayCollection();
+        $this->discussions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,6 +187,37 @@ class Trick
             // set the owning side to null (unless already changed)
             if ($imageList->getTrick() === $this) {
                 $imageList->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Discussion[]
+     */
+    public function getDiscussions(): Collection
+    {
+        return $this->discussions;
+    }
+
+    public function addDiscussion(Discussion $discussion): self
+    {
+        if (!$this->discussions->contains($discussion)) {
+            $this->discussions[] = $discussion;
+            $discussion->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscussion(Discussion $discussion): self
+    {
+        if ($this->discussions->contains($discussion)) {
+            $this->discussions->removeElement($discussion);
+            // set the owning side to null (unless already changed)
+            if ($discussion->getTrick() === $this) {
+                $discussion->setTrick(null);
             }
         }
 

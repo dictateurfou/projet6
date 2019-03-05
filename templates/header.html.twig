@@ -1,0 +1,15 @@
+<header>
+	<img src="{{asset('images/snow.jpg')}}"  />
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/trick/add">Trick</a></li>
+		
+		{% if not app.user %}
+    		<li><a href="/login">sign in</a></li>
+			<li><a href="/register">sign up</a></li>
+		{% else %}
+			<li><a href="/logout">logout</a></li>
+		{% endif %}
+		
+	</ul>
+</header>

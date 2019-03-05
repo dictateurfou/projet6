@@ -40,13 +40,16 @@ class SecurityController extends AbstractController
      /**
      * @Route("/accountValidation/{token}", name="app_valid_account")
      */
-    public function validAccount($token)
+    public function validAccount(AccountValidation $accountValidation,$token)
     {
-
-        $accountValidation = $this->getDoctrine()
-        ->getRepository(AccountValidation::class)
-        ->findBy(array('token' => $token));
-        //->findBy(array('token' => $token));
-        dd($accountValidation);
+        if (!$accountValidation) {
+            return $this->redirectToRoute("accueil");
+        }
+        $accountValidation->getUser()->setValid(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($accountValidation);
+        $entityManager->remove($accountValidation);
+        $entityManager->flush();
+        dd($accountValidation->getUser());
     }
 }

@@ -1,24 +1,17 @@
+body{
+	margin:0em;
+}
+
 h1{
 	color:red;
 }
 
-#registerForm{
-	width:20em;
-	margin:0 auto;
-	background-color:black;
-	text-align:center;
+ul{
+	list-style-type:none;
+	padding:0em;
 }
 
-#registerForm label{
-	width:100%;
-	display:block;
-	text-align:center;
-	color:#fff;
-}
 
-#registerForm input{
-	text-align:center;
-}
 
 #trick-content{
 	text-align:center;
@@ -92,6 +85,7 @@ h1{
 #form-edit{
 	text-align:center;
 	margin:0 auto;
+	margin-top:2em;
 	width:70%;
 }
 
@@ -122,3 +116,104 @@ h1{
 .media-action.delete:hover{
 	background-color:red;
 }
+
+
+/*header*/
+
+header{
+	background-color:grey;
+}
+
+header img{
+	width:8em;
+}
+
+header ul{
+	margin-top:1.7em;
+	padding:0em;
+	list-style-type: none;
+	float:right;
+	margin-right:5em;
+}
+
+header ul li{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+header a{
+	text-decoration: none;
+}
+
+header a:visited{
+
+	color:#fff;
+}
+
+/* register */
+#register{
+	width:20em;
+	margin:0 auto;
+	background-color:black;
+	text-align:center;
+}
+
+#register label{
+	width:100%;
+	display:block;
+	text-align:center;
+	color:#fff;
+}
+
+#register input{
+	text-align:center;
+}
+
+/*end register*/
+
+/*login*/
+#login{
+	width:20em;
+	margin:0 auto;
+	background-color:black;
+	text-align:center;
+}
+
+#login label{
+	width:100%;
+	display:block;
+	text-align:center;
+	color:#fff;
+}
+
+#login input{
+	text-align:center;
+}
+
+
+
+/*end login*/
+#title-form{
+	text-align: center;
+}
+
+/*form trick*/
+#add-trick{
+	width:20em;
+	margin:0 auto;
+	margin-top:1em;
+	background-color:black;
+	text-align:center;
+}
+
+#add-trick label{
+	width:100%;
+	display:block;
+	text-align:center;
+	color:#fff;
+}
+
+#add-trick input{
+	text-align:center;
+}
+/*end form add-trick*/

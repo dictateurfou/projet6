@@ -28,9 +28,12 @@ class Discussion
     private $content;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="discussions")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $trick_id;
+    private $trick;
+
+
 
     public function getId(): ?int
     {
@@ -45,7 +48,6 @@ class Discussion
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
-
         return $this;
     }
 
@@ -61,15 +63,17 @@ class Discussion
         return $this;
     }
 
-    public function getTrickId(): ?int
+    public function getTrick(): ?Trick
     {
-        return $this->trick_id;
+        return $this->trick;
     }
 
-    public function setTrickId(int $trick_id): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->trick_id = $trick_id;
+        $this->trick = $trick;
 
         return $this;
     }
+
+
 }

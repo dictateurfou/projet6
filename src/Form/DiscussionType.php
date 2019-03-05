@@ -2,27 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
+use App\Entity\Discussion;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class ImageType extends AbstractType
+class DiscussionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',HiddenType::class,array('required' => false))
-            ->add('file',FileType::class,array('required' => true,'label' => false))
+            ->add('content',TextareaType::class,array('label' => "Commentaire"))
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Image::class,
+            'data_class' => Discussion::class,
         ]);
     }
 }

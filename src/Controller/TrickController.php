@@ -20,7 +20,7 @@ class TrickController extends AbstractController
     /**
      * Page d'info d'un trick
      *
-     * @Route("/view/{trickId}", name="trick view")
+     * @Route("/view/{trickId}", name="trick_view")
      */
     public function showTrick($trickId)
     {
@@ -38,7 +38,7 @@ class TrickController extends AbstractController
     /**
      * Page d'ajout d'un trick
      *
-     * @Route("/add", name="add trick")
+     * @Route("/add", name="add_trick")
      */
     public function addTrick(Request $request,ImageUploader $fileUploader,VideoLinkValidator $videoLinkvalidator){
         $entityManager = $this->getDoctrine()->getManager();
@@ -61,6 +61,7 @@ class TrickController extends AbstractController
             $entityManager->persist($trick);
            
             $entityManager->flush();
+            $form = $this->createForm(TrickType::class, $trick);
             
         }
         return $this->render('trick/add.html.twig', ['form' => $form->createView()]);
@@ -70,16 +71,18 @@ class TrickController extends AbstractController
     /**
     * Page d'ajout d'un trick
     *
-    * @Route("/edit/{trick}", name="add trick")
+    * @Route("/edit/{trick}", name="edit_trick")
     */
-    public function editTrick(Request $request,ImageUploader $fileUploader,VideoLinkValidator $videoLinkvalidator,Trick $trick){
+    public function editTrick(Request $request,VideoLinkValidator $videoLinkvalidator,Trick $trick){
+        dump(dirname(__DIR__).'/../public/uploads/trick');
         $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()){
-            $fileUploader->uploadEdit($trick);
+            
+           
             $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
             $entityManager->persist($trick);
             $trick->setEdited("yes");
@@ -87,6 +90,8 @@ class TrickController extends AbstractController
             $date->format('Y-m-d H:i:s');
             $trick->setEditedAt($date);
             $entityManager->flush();
+            $form = $this->createForm(TrickType::class, $trick);
+
         }
         return $this->render('trick/edit.html.twig', ['form' => $form->createView()]);
     }

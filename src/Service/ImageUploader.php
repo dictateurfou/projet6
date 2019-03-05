@@ -6,11 +6,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader{
 	private $targetDirectory;
-	const VALIDTYPE = ["image/jpeg","image/png"];
+	
 
  	public function __construct($targetDirectory)
     {
-        $this->targetDirectory = $targetDirectory;
+       
     }
 
      public function upload($imageList)
@@ -41,17 +41,17 @@ class ImageUploader{
                     $fileName = $value->getName();
                     $newFileName = md5(uniqid()).'.'.$value->getFile()->guessExtension();
                     try {
-                        $this->deleteFile($fileName);
                         $value->getFile()->move($this->getTargetDirectory(), $newFileName);
+                        $this->deleteFile($fileName);
                         $value->setName($newFileName);
                         dump($value);
                     } catch(FileException $e){
-                        $trick->removeImageList($imageList);
+                        //$trick->removeImageList($imageList);
                     }
                 }
                 else{
                     if($imageList->getName() == null){
-                        $trick->removeImageList($imageList);
+                        //$trick->removeImageList($imageList);
                     }
                 }
             }

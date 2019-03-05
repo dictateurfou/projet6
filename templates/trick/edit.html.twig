@@ -80,7 +80,10 @@ const EmbedUrl = {youtube:"https://www.youtube.com/embed/",dailymotion:"https://
 function reorderImage(){
 	var li = $("#imageList-fields-list li");
 	var prototype = $("#imageList-fields-list").data("prototype");
+
 	li.each(function( index ) {	
+		var lastId = $(this).attr('id');
+		console.log("ok");
 		$(this).attr('id',index);
 		$("#trick_imageList_" + lastId).attr('id',"trick_imageList_" + index);
 		/*hidden input*/
