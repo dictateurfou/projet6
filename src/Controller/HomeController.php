@@ -5,8 +5,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use SnowTrick\TrickBundle\Entity\Trick;
 use App\Entity\Category;
+use App\Entity\Trick;
+use App\Entity\Image;
 
 
 class HomeController extends AbstractController
@@ -18,8 +19,7 @@ class HomeController extends AbstractController
      */
     public function home()
     {
-        $test = new \SnowTrick\TrickBundle\TrickBundle();
-
+        
         return $this->render('home.html.twig', []);
     }
 

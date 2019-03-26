@@ -5,10 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Trick;
 use App\Entity\Image;
+use App\Entity\Discussion;
 use App\Form\TrickType;
+use App\Form\DiscussionType;
 use App\Service\ImageUploader;
 use App\Service\VideoLinkValidator;
 
@@ -22,17 +24,34 @@ class TrickController extends AbstractController
      *
      * @Route("/view/{trickId}", name="trick_view")
      */
-    public function showTrick($trickId)
+    public function showTrick(Request $request,$trickId)
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $trick = $this->getDoctrine()
         ->getRepository(Trick::class)
         ->find($trickId);
 
+        $comment = new Discussion();
         if (!$trick) {
             return $this->redirectToRoute("accueil");
         }
 
-        return $this->render('trick.html.twig', ['trick' => $trick]);
+        $form = $this->createForm(DiscussionType::class,$comment);
+        $form->handleRequest($request);
+        $user = $this->getUser();
+
+        $repositoryComment = $this->getDoctrine()->getRepository(Discussion::class);
+ 
+        if($form->isSubmitted() && $form->isValid() && $user !== null) {
+            $comment->setAuthor($user);
+            $comment->setTrick($trick);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+        }
+
+        return $this->render('trick.html.twig', ['trick' => $trick,'form' => $form->createView()]);
     }
 
     /**
@@ -40,7 +59,8 @@ class TrickController extends AbstractController
      *
      * @Route("/add", name="add_trick")
      */
-    public function addTrick(Request $request,ImageUploader $fileUploader,VideoLinkValidator $videoLinkvalidator){
+    public function addTrick(Request $request,VideoLinkValidator $videoLinkvalidator){
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $entityManager = $this->getDoctrine()->getManager();
         $trick = new Trick();
         $date = new \DateTime();
@@ -57,7 +77,6 @@ class TrickController extends AbstractController
             $file = $trick->getImageList();
             $data = $form->getData();
             $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
-            $fileUploader->upload($trick->getImageList());
             $entityManager->persist($trick);
            
             $entityManager->flush();
@@ -74,15 +93,13 @@ class TrickController extends AbstractController
     * @Route("/edit/{trick}", name="edit_trick")
     */
     public function editTrick(Request $request,VideoLinkValidator $videoLinkvalidator,Trick $trick){
-        dump(dirname(__DIR__).'/../public/uploads/trick');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()){
-            
-           
             $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
             $entityManager->persist($trick);
             $trick->setEdited("yes");
@@ -91,7 +108,6 @@ class TrickController extends AbstractController
             $trick->setEditedAt($date);
             $entityManager->flush();
             $form = $this->createForm(TrickType::class, $trick);
-
         }
         return $this->render('trick/edit.html.twig', ['form' => $form->createView()]);
     }

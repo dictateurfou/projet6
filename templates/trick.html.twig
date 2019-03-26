@@ -29,5 +29,35 @@
 				{% endif %}
 	    	</ul>
 	    </section>
+
+	    <ul id="comment-list">
+	       
+	    </ul>
+	    {% if app.user %}
+    			{{ form_start(form) }}		
+    			{{ form_end(form) }}
+		{% endif %}
 	</div>
+{{dump(app.request.httpHost)}}
+	<script type="text/javascript">
+	    $.ajax({
+			url : 'http://127.0.0.1:8000/api/message/{{trick.id}}/1',
+			type : 'GET',
+			dataType : 'json',
+			success : function(objList, statut){
+				objList = JSON.parse(objList);
+				var i = 0;
+				console.log(objList.length);
+				while(i < objList.length){
+					$("#comment-list").append("<li> <div id='comment-avatar'> <i class='fas fa-user'></i> </div> <div id='comment-content'>" + objList[i].content + "</div> </li>");
+					i++;
+				}
+			},
+
+			error : function(resultat, statut, erreur){
+
+			}
+
+	    });
+	</script>
 {% endblock %}

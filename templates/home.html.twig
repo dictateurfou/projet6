@@ -1,4 +1,55 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1>Homepage </h1>
+	<section id="home-header">
+			<h1>La référence des ticks de snowboard</h1>
+	</section>
+
+	<section id="trick-list">
+		<ul>
+
+		</ul>
+	</section>
+
+	<script>
+
+	    $.ajax({
+			url : 'http://127.0.0.1:8000/api/trick',
+			type : 'GET',
+			dataType : 'json',
+			success : function(objList, statut){
+				objList = JSON.parse(objList);
+				var i = 0;
+				console.log(objList);
+				console.log(objList.length);
+
+				while(i < objList.length){
+					var link = $('<a>',{href:"/trick/view/" + objList[i].id +"",})
+					var image = $("<img>",{src:"/uploads/trick/" + objList[i].imageList[0].name + "",})
+					var title = $('<h2>',{text:objList[i].name});
+					var li = $('<li>');
+					var btnEdit = $('<div>',{html:"<i class='fas fa-edit'></i>","data-id":objList[i].id,class:"trick-edit"});
+					var btnDelete = $('<div>',{html:"<i class='fas fa-trash-alt'></i>","data-id":objList[i].id,class:"trick-delete"});
+					image.appendTo(link);
+					title.appendTo(link);
+					link.appendTo(li);
+					btnEdit.appendTo(li);
+					btnDelete.appendTo(li);
+					$("#trick-list ul").append(li);
+					i++;
+				}
+					$(".trick-edit").click(function(){
+						var id = $(this).data('id');
+						window.location.replace("/trick/edit/" + id + "");
+
+						console.log("trick edit call");
+					});
+			},
+
+			error : function(resultat, statut, erreur){
+
+			}
+
+	    });
+
+	</script>
 {% endblock %}

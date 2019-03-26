@@ -19,6 +19,19 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
+    public function findWithPagination($page){
+        $max = 15;
+        $offset = ($page - 1) * $max;
+        $limit = $page * $max;
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.id', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Trick[] Returns an array of Trick objects
     //  */

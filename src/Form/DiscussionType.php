@@ -6,6 +6,8 @@ use App\Entity\Discussion;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DiscussionType extends AbstractType
 {
@@ -13,6 +15,7 @@ class DiscussionType extends AbstractType
     {
         $builder
             ->add('content',TextareaType::class,array('label' => "Commentaire"))
+            ->add('valider', SubmitType::class, array('label' => 'Valider'))
         ;
     }
 
