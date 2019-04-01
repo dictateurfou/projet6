@@ -8,7 +8,7 @@
     			<div id="btn-edit"><a href="/trick/edit/{{trick.id}}"><i class='fas fa-edit'></i></a></div>
 			{% endif %}
 			
-			<img id="trick-img-header" src="{{asset('images/snow.jpg')}}" />
+			<img id="trick-img-header" src="{{asset('uploads/trick/'~ trick.imageList[0].name ~'')}}" />
 			<h1 id="trick-header-title">{{trick.getName()}} </h1>
 		</section>
 		<section id="trick-media">

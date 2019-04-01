@@ -4,7 +4,7 @@
 {% block body %}
 	<div id="trick-edit-container">
 		<section id="trick-header">
-				<img id="trick-img-header" src="{{asset('images/snow.jpg')}}" />
+				<img id="trick-img-header" src="{{asset('uploads/trick/'~ form.imageList[0].vars.data.name ~'')}}" />
 				<h1 id="trick-header-title">{{trick.getName()}} </h1>
 		</section>
 		<div id="form-edit">
