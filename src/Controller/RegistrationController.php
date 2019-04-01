@@ -31,7 +31,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $user->setValid(false);
+            $user->setAvatar("default.png");
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -45,7 +46,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
                     $message = (new \Swift_Message("Comfirmation d'inscription"))
                         ->setFrom('dev@survive-in-hell.fr')
-                        ->setTo('dev@survive-in-hell.fr')
+                        ->setTo($user->getEmail())
                         ->setBody(
                             $this->renderView(
                                 // templates/emails/registration.html.twig

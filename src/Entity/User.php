@@ -45,6 +45,27 @@ class User implements UserInterface
      */
     private $valid;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $avatar;
+
+    const VALIDTYPE = ["image/jpeg","image/png"];
+
+    private $uploadedAvatar;
+
+    public function getUploadedAvatar()
+    {
+        return $this->uploadedAvatar;
+    }
+
+    public function setUploadedAvatar($img): self
+    {
+        $this->uploadedAvatar = $img;
+        $this->uploadFile();
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,7 +90,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -140,5 +161,62 @@ class User implements UserInterface
         $this->valid = $valid;
 
         return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+
+    private function uploadFile(){
+        $targetDirectory = dirname(__DIR__).'/../public/uploads/avatar';
+        $valid = $this->checkValidMimeType($this->uploadedAvatar->getMimeType());
+        if($valid == true){
+            $fileName = $this->avatar;
+            $newFileName = md5(uniqid()).'.'.$this->uploadedAvatar->guessExtension();
+            try {
+                $this->uploadedAvatar->move($targetDirectory, $newFileName);
+                if($fileName !== null){
+                     $this->deleteFile($fileName);
+                }
+                $this->avatar = $newFileName;
+                /*set uploadedAvatar at null for fix Serialization of 'Symfony\Component\HttpFoundation\File\UploadedFile' is not allowed*/
+                $this->uploadedAvatar = null;
+
+                
+            } catch(FileException $e){
+            
+            }
+        }
+    }
+
+    private function checkValidMimeType($fileType)
+    {
+        $i = 0;
+        $valid = false;
+        while(count(self::VALIDTYPE) > $i){
+            if(self::VALIDTYPE[$i] == $fileType){
+                $valid = true;
+                break;
+            }
+            $i++;
+        }
+        return $valid;
+    }
+
+    private function deleteFile($name){
+        $targetDirectory = dirname(__DIR__).'/../public/uploads/avatar';
+        $myFile = $targetDirectory."/".$name;
+        if(file_exists($myFile)) {
+            unlink($myFile) or die("Couldn't delete file");
+        }
     }
 }

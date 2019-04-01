@@ -50,7 +50,7 @@ class TrickController extends AbstractController
             $entityManager->flush();
 
         }
-
+        
         return $this->render('trick.html.twig', ['trick' => $trick,'form' => $form->createView()]);
     }
 
@@ -109,7 +109,7 @@ class TrickController extends AbstractController
             $entityManager->flush();
             $form = $this->createForm(TrickType::class, $trick);
         }
-        return $this->render('trick/edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('trick/edit.html.twig', ['form' => $form->createView(),'trick' => $trick]);
     }
 
 

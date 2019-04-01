@@ -50,6 +50,6 @@ class SecurityController extends AbstractController
         $entityManager->persist($accountValidation);
         $entityManager->remove($accountValidation);
         $entityManager->flush();
-        dd($accountValidation->getUser());
+        return $this->redirectToRoute("app_login");
     }
 }

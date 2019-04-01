@@ -4,6 +4,10 @@
 {% block body %}
 	<div id="trick-content">
 		<section id="trick-header">
+			{% if app.user %}
+    			<div id="btn-edit"><a href="/trick/edit/{{trick.id}}"><i class='fas fa-edit'></i></a></div>
+			{% endif %}
+			
 			<img id="trick-img-header" src="{{asset('images/snow.jpg')}}" />
 			<h1 id="trick-header-title">{{trick.getName()}} </h1>
 		</section>
@@ -47,9 +51,9 @@
 			success : function(objList, statut){
 				objList = JSON.parse(objList);
 				var i = 0;
-				console.log(objList.length);
+				console.log(objList);
 				while(i < objList.length){
-					$("#comment-list").append("<li> <div id='comment-avatar'> <i class='fas fa-user'></i> </div> <div id='comment-content'>" + objList[i].content + "</div> </li>");
+					$("#comment-list").append("<li class='clearfix'><div id='comment-user-info'> <img src='/uploads/avatar/" + objList[i].author.avatar + "' /><p class='comment-username'>" + objList[i].author.username + "</p></div><div id='comment-content'> <p id='comment-text'>" + objList[i].content + "</p></div> </li>");
 					i++;
 				}
 			},

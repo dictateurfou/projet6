@@ -30,6 +30,12 @@ textarea{
     height:20em;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /*home page*/
 #home-header{
 	min-height: calc(100vh - 5em);
@@ -51,7 +57,7 @@ textarea{
     white-space: nowrap;
     width: 100%;
     text-overflow: ellipsis;
-    font-size: 5em;
+    font-size: 4em;
 }
 
 #trick-list ul{
@@ -100,7 +106,15 @@ textarea{
 
 #trick-img-header{
 	width:100%;
-	
+}
+
+#trick-header #btn-edit{
+	width:3em;
+	position:absolute;
+	color:#fff;
+	right:0em;
+	padding:0.5em 0em;
+	background-color:green;
 }
 #trick-header{
 	position:relative;
@@ -160,26 +174,6 @@ textarea{
 	color:#fff;
 }
 
-#form-edit{
-	text-align:center;
-	margin:0 auto;
-	margin-top:2em;
-	width:70%;
-}
-
-#form-edit ul{
-	list-style: none;
-	list-style-type: none;
-}
-
-#form-edit li{
-	display: inline-block;
-	width:20%;
-	border:1px solid black;
-	padding:0.3em 0.8em;
-	border-radius:10px;
-	font-size:1.2em;
-}
 
 .media-action{
 	display:inline-block;
@@ -299,15 +293,39 @@ header a:visited{
 
 /*comment*/
 #comment-list{
+	position:relative;
 	margin:0 auto;
 	width:70%;
 	text-align: left;
 }
 
-#comment-avatar{
+#comment-user-info{
 	float:left;
-	font-size:2em;
+	left:0em;
+	width:5em;
+	max-height:100%;
+	top:0em;
+	
 }
+
+#comment-user-info img{
+	width:100%;
+	margin:none;
+}
+
+#comment-text{
+	position:relative;
+	top:0em;
+
+}
+
+.comment-username{
+	margin:0em;
+	padding:0em;
+	text-align:center;
+}
+
+
 
 #comment-avatar i{
 	background-color: green;
@@ -316,18 +334,145 @@ header a:visited{
 }
 
 #comment-list li{
-	margin-top:0.5em;
-	overflow: hidden;
+	margin-top:1em;
+	
 }
 
 #comment-content{
-	width:89%;
+	float:right;
+	width:calc(100% - 8em);
 	border:1px solid black;
 	margin-top:0.3em;
 	padding:0.5em;
-	margin-left:1em;
-	float:left;
+
+
 }
 
 
 /*end Comment*/
+
+
+/*profile edit*/
+
+
+
+/*end profile edit*/
+
+
+/*trick edit*/
+
+#form-edit{
+	text-align:center;
+	margin:0 auto;
+	margin-top:2em;
+	width:100%;
+}
+
+#form-edit ul{
+	list-style: none;
+	list-style-type: none;
+}
+
+#form-edit li{
+	display: inline-block;
+	width:20%;
+
+	border-radius:10px;
+	font-size:1.2em;
+}
+
+#trick-edit-container{
+	margin:0 auto;
+	border:1px solid black;
+	width:80%;
+}
+
+/*end trick edit*/
+
+
+/* responsive */
+	@media only screen and (max-width: 1200px) {
+		#trick-list li{
+			width:28%;
+		}
+
+		#home-header h1{
+		    font-size: 3em;
+		}
+
+		#trick-media embed{
+			width:30%;
+			height:10em;
+		}
+
+		#trick-media img{
+			width:30%;
+			height:10em;
+		}
+
+		#trick-content{
+			width:100%;
+			border:none;
+		}
+
+		#form-edit li{
+			width:30%;
+	
+		}
+	}
+
+
+	@media only screen and (max-width: 900px) {
+		#trick-list li{
+			width:45%;
+		}
+
+		#home-header h1{
+		    font-size: 2em;
+		}
+
+		#form-edit li{
+			width:45%;
+		}
+
+	}
+
+
+	@media only screen and (max-width: 685px) {
+
+		#trick-list li{
+			width:100%;
+			margin-left:0em;
+			margin-right:0em;
+			height:auto;
+		}
+
+		#trick-media embed{
+			width:100%;
+			height:auto;
+		}
+
+		#trick-media img{
+			width:100%;
+			height:auto;
+		}
+
+		#home-header h1{
+		    font-size: 1.5em;
+		}
+
+		#form-edit li{
+			width:100%;
+		}
+
+		#trick-edit-container{
+			width:100%;
+		}
+
+		#comment-list{
+			width:100%;
+		}
+
+	}
+
+/* */
