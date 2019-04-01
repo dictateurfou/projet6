@@ -34,34 +34,49 @@
 	    	</ul>
 	    </section>
 
+	    {% if app.user %}
+			{{ form_start(form) }}		
+			{{ form_end(form) }}
+		{% endif %}
+
 	    <ul id="comment-list">
 	       
 	    </ul>
-	    {% if app.user %}
-    			{{ form_start(form) }}		
-    			{{ form_end(form) }}
-		{% endif %}
+	    <button id="load-more">load more</button>
+
 	</div>
-{{dump(app.request.httpHost)}}
 	<script type="text/javascript">
-	    $.ajax({
-			url : 'http://127.0.0.1:8000/api/message/{{trick.id}}/1',
-			type : 'GET',
-			dataType : 'json',
-			success : function(objList, statut){
-				objList = JSON.parse(objList);
-				var i = 0;
-				console.log(objList);
-				while(i < objList.length){
-					$("#comment-list").append("<li class='clearfix'><div id='comment-user-info'> <img src='/uploads/avatar/" + objList[i].author.avatar + "' /><p class='comment-username'>" + objList[i].author.username + "</p></div><div id='comment-content'> <p id='comment-text'>" + objList[i].content + "</p></div> </li>");
-					i++;
+		var page = 1;
+		loadComments(page);
+	    function loadComments(pagination){
+	    	$.ajax({
+				url : 'http://{{app.request.httpHost}}/api/message/{{trick.id}}/' + pagination +'',
+				type : 'GET',
+				dataType : 'json',
+				success : function(objList, statut){
+					objList = JSON.parse(objList);
+					var i = 0;
+					
+					while(i < objList.length){
+						$("#comment-list").append("<li class='clearfix'><div id='comment-user-info'> <img src='/uploads/avatar/" + objList[i].author.avatar + "' /><p class='comment-username'>" + objList[i].author.username + "</p></div><div id='comment-content'> <p id='comment-text'>" + objList[i].content + "</p></div> </li>");
+						i++;
+					}
+					page++;
+					
+					if(objList.length == 0){
+						page--;
+						$("#load-more").hide();
+					}
+				},
+
+				error : function(resultat, statut, erreur){
+
 				}
-			},
+	    	});
+	    }
 
-			error : function(resultat, statut, erreur){
-
-			}
-
-	    });
+		$( "#load-more" ).click(function() {
+			loadComments(page);
+		});
 	</script>
 {% endblock %}

@@ -60,6 +60,10 @@ textarea{
     font-size: 4em;
 }
 
+#trick-list{
+	text-align:center;
+}
+
 #trick-list ul{
 	text-align:center;
 	margin-left:1em;
@@ -388,6 +392,7 @@ header a:visited{
 }
 
 /*end trick edit*/
+
 
 
 /* responsive */
