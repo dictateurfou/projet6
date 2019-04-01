@@ -14,7 +14,7 @@ class DiscussionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content',TextareaType::class,array('label' => "Commentaire"))
+            ->add('content', TextareaType::class, array('label' => 'Commentaire'))
             ->add('valider', SubmitType::class, array('label' => 'Valider'))
         ;
     }

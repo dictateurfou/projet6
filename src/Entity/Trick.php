@@ -34,7 +34,6 @@ class Trick
      */
     private $category;
 
-
     /**
      * @ORM\Column(type="json")
      */
@@ -111,8 +110,6 @@ class Trick
 
         return $this;
     }
-
-
 
     public function getVideoList(): ?array
     {

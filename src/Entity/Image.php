@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
@@ -29,8 +29,7 @@ class Image
      */
     private $trick;
 
-    const VALIDTYPE = ["image/jpeg","image/png"];
-
+    const VALIDTYPE = ['image/jpeg', 'image/png'];
 
     public function getId(): ?int
     {
@@ -45,6 +44,7 @@ class Image
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -52,7 +52,7 @@ class Image
     {
         $this->file = $file;
         $this->uploadFile();
-        
+
         return $this;
     }
 
@@ -73,22 +73,21 @@ class Image
         return $this;
     }
 
-    private function uploadFile(){
-        dump("test");
+    private function uploadFile()
+    {
+        dump('test');
         $targetDirectory = dirname(__DIR__).'/../public/uploads/trick';
         $valid = $this->checkValidMimeType($this->file->getMimeType());
-        if($valid == true){
+        if (true == $valid) {
             $fileName = $this->name;
             $newFileName = md5(uniqid()).'.'.$this->file->guessExtension();
             try {
                 $this->file->move($targetDirectory, $newFileName);
-                if($fileName !== null){
-                     $this->deleteFile($fileName);
+                if (null !== $fileName) {
+                    $this->deleteFile($fileName);
                 }
                 $this->name = $newFileName;
-                
-            } catch(FileException $e){
-            
+            } catch (FileException $e) {
             }
         }
     }
@@ -97,23 +96,23 @@ class Image
     {
         $i = 0;
         $valid = false;
-        while(count(self::VALIDTYPE) > $i){
-            if(self::VALIDTYPE[$i] == $fileType){
+        while (count(self::VALIDTYPE) > $i) {
+            if (self::VALIDTYPE[$i] == $fileType) {
                 $valid = true;
                 break;
             }
-            $i++;
+            ++$i;
         }
+
         return $valid;
     }
 
-    private function deleteFile($name){
+    private function deleteFile($name)
+    {
         $targetDirectory = dirname(__DIR__).'/../public/uploads/trick';
-        $myFile = $targetDirectory."/".$name;
-        if(file_exists($myFile)) {
+        $myFile = $targetDirectory.'/'.$name;
+        if (file_exists($myFile)) {
             unlink($myFile) or die("Couldn't delete file");
         }
     }
-
-    
 }

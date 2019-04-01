@@ -19,10 +19,12 @@ class DiscussionRepository extends ServiceEntityRepository
         parent::__construct($registry, Discussion::class);
     }
 
-    public function findWithPagination($trickId,$page){
+    public function findWithPagination($trickId, $page)
+    {
         $max = 15;
         $offset = ($page - 1) * $max;
         $limit = $page * $max;
+
         return $this->createQueryBuilder('d')
             ->andWhere('d.trick = :val')
             ->setParameter('val', $trickId)
@@ -33,6 +35,7 @@ class DiscussionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
     // /**
     //  * @return Discussion[] Returns an array of Discussion objects
     //  */

@@ -11,13 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
 class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder,\Swift_Mailer $mailer): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -32,11 +31,11 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setValid(false);
-            $user->setAvatar("default.png");
+            $user->setAvatar('default.png');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
             $token = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
 
             $accountValidation = new AccountValidation();
@@ -44,7 +43,7 @@ class RegistrationController extends AbstractController
             $accountValidation->setToken($token);
             $entityManager->persist($accountValidation);
             $entityManager->flush();
-                    $message = (new \Swift_Message("Comfirmation d'inscription"))
+            $message = (new \Swift_Message("Comfirmation d'inscription"))
                         ->setFrom('dev@survive-in-hell.fr')
                         ->setTo($user->getEmail())
                         ->setBody(
@@ -57,7 +56,7 @@ class RegistrationController extends AbstractController
                         )
                     ;
 
-             $mailer->send($message);
+            $mailer->send($message);
 
             /*dd($token);*/
             return $this->redirectToRoute('app_login');

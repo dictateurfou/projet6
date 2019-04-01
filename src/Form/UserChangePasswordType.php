@@ -19,7 +19,7 @@ class UserChangePasswordType extends AbstractType
             ->add('plainLastPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => "actual password",
+                'label' => 'actual password',
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -36,7 +36,7 @@ class UserChangePasswordType extends AbstractType
             ->add('plainNewPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => "new password",
+                'label' => 'new password',
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([

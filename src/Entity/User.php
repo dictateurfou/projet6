@@ -50,7 +50,7 @@ class User implements UserInterface
      */
     private $avatar;
 
-    const VALIDTYPE = ["image/jpeg","image/png"];
+    const VALIDTYPE = ['image/jpeg', 'image/png'];
 
     private $uploadedAvatar;
 
@@ -63,6 +63,7 @@ class User implements UserInterface
     {
         $this->uploadedAvatar = $img;
         $this->uploadFile();
+
         return $this;
     }
 
@@ -175,25 +176,22 @@ class User implements UserInterface
         return $this;
     }
 
-
-    private function uploadFile(){
+    private function uploadFile()
+    {
         $targetDirectory = dirname(__DIR__).'/../public/uploads/avatar';
         $valid = $this->checkValidMimeType($this->uploadedAvatar->getMimeType());
-        if($valid == true){
+        if (true == $valid) {
             $fileName = $this->avatar;
             $newFileName = md5(uniqid()).'.'.$this->uploadedAvatar->guessExtension();
             try {
                 $this->uploadedAvatar->move($targetDirectory, $newFileName);
-                if($fileName !== null){
-                     $this->deleteFile($fileName);
+                if (null !== $fileName) {
+                    $this->deleteFile($fileName);
                 }
                 $this->avatar = $newFileName;
                 /*set uploadedAvatar at null for fix Serialization of 'Symfony\Component\HttpFoundation\File\UploadedFile' is not allowed*/
                 $this->uploadedAvatar = null;
-
-                
-            } catch(FileException $e){
-            
+            } catch (FileException $e) {
             }
         }
     }
@@ -202,20 +200,22 @@ class User implements UserInterface
     {
         $i = 0;
         $valid = false;
-        while(count(self::VALIDTYPE) > $i){
-            if(self::VALIDTYPE[$i] == $fileType){
+        while (count(self::VALIDTYPE) > $i) {
+            if (self::VALIDTYPE[$i] == $fileType) {
                 $valid = true;
                 break;
             }
-            $i++;
+            ++$i;
         }
+
         return $valid;
     }
 
-    private function deleteFile($name){
+    private function deleteFile($name)
+    {
         $targetDirectory = dirname(__DIR__).'/../public/uploads/avatar';
-        $myFile = $targetDirectory."/".$name;
-        if(file_exists($myFile)) {
+        $myFile = $targetDirectory.'/'.$name;
+        if (file_exists($myFile)) {
             unlink($myFile) or die("Couldn't delete file");
         }
     }

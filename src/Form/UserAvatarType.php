@@ -14,7 +14,7 @@ class UserAvatarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uploadedAvatar',FileType::class,array('required' => true,'label' => false,))
+            ->add('uploadedAvatar', FileType::class, array('required' => true, 'label' => false))
             ->add('valider', SubmitType::class, array('label' => 'Valider'))
         ;
     }

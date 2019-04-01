@@ -33,8 +33,6 @@ class Discussion
      */
     private $trick;
 
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -48,6 +46,7 @@ class Discussion
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -74,6 +73,4 @@ class Discussion
 
         return $this;
     }
-
-
 }

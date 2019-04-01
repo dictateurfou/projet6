@@ -24,9 +24,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-
-
-     /**
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout()
@@ -35,21 +33,20 @@ class SecurityController extends AbstractController
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 
-
-
-     /**
+    /**
      * @Route("/accountValidation/{token}", name="app_valid_account")
      */
-    public function validAccount(AccountValidation $accountValidation,$token)
+    public function validAccount(AccountValidation $accountValidation, $token)
     {
         if (!$accountValidation) {
-            return $this->redirectToRoute("accueil");
+            return $this->redirectToRoute('accueil');
         }
         $accountValidation->getUser()->setValid(true);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($accountValidation);
         $entityManager->remove($accountValidation);
         $entityManager->flush();
-        return $this->redirectToRoute("app_login");
+
+        return $this->redirectToRoute('app_login');
     }
 }
