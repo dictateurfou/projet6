@@ -12,6 +12,12 @@
 	</section>
 
 	<script>
+		{% if not app.user %}
+    		var connected = false;
+		{% else %}
+			var connected = true;
+		{% endif %}
+
 		var page = 1;
 		loadTrick(page);
 	    function loadTrick(pagination){
@@ -35,14 +41,26 @@
 						image.appendTo(link);
 						title.appendTo(link);
 						link.appendTo(li);
-						btnEdit.appendTo(li);
-						btnDelete.appendTo(li);
+						if(connected){
+							btnEdit.appendTo(li);
+							btnDelete.appendTo(li);
+						}
 						$("#trick-list ul").append(li);
 						i++;
 					}
 					$(".trick-edit").click(function(){
 						var id = $(this).data('id');
 						window.location.replace("/trick/edit/" + id + "");
+
+						console.log("trick edit call");
+					});
+
+					$(".trick-delete").click(function(){
+						var id = $(this).data('id');
+						var r = confirm("are you sure to delete this trick ?");
+						if (r == true) {
+						  window.location.replace("/trick/remove/" + id + "");
+						}
 
 						console.log("trick edit call");
 					});

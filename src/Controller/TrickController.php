@@ -14,7 +14,7 @@ use App\Form\DiscussionType;
 use App\Service\ImageUploader;
 use App\Service\VideoLinkValidator;
 
-/** @Route("/trick", name="blog_") */
+/** @Route("/trick", name="trick_") */
 class TrickController extends AbstractController
 {
 
@@ -22,7 +22,7 @@ class TrickController extends AbstractController
     /**
      * Page d'info d'un trick
      *
-     * @Route("/view/{trickId}", name="trick_view")
+     * @Route("/view/{trickId}", name="view")
      */
     public function showTrick(Request $request,$trickId)
     {
@@ -50,14 +50,28 @@ class TrickController extends AbstractController
             $entityManager->flush();
 
         }
-        
+
         return $this->render('trick.html.twig', ['trick' => $trick,'form' => $form->createView()]);
     }
 
+
+    /**
+     * Page d'info d'un trick
+     *
+     * @Route("/remove/{trick}", name="remove")
+     */
+    public function removeTrick(Request $request,Trick $trick)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($trick);
+        $em->flush();
+
+        return $this->redirectToRoute("accueil");
+    }
     /**
      * Page d'ajout d'un trick
      *
-     * @Route("/add", name="add_trick")
+     * @Route("/add", name="add")
      */
     public function addTrick(Request $request,VideoLinkValidator $videoLinkvalidator){
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -81,7 +95,7 @@ class TrickController extends AbstractController
            
             $entityManager->flush();
             $form = $this->createForm(TrickType::class, $trick);
-            
+            return $this->redirectToRoute("accueil");
         }
         return $this->render('trick/add.html.twig', ['form' => $form->createView()]);
     }
@@ -90,7 +104,7 @@ class TrickController extends AbstractController
     /**
     * Page d'ajout d'un trick
     *
-    * @Route("/edit/{trick}", name="edit_trick")
+    * @Route("/edit/{trick}", name="edit")
     */
     public function editTrick(Request $request,VideoLinkValidator $videoLinkvalidator,Trick $trick){
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
