@@ -58,7 +58,14 @@
 					var i = 0;
 					
 					while(i < objList.length){
-						$("#comment-list").append("<li class='clearfix'><div id='comment-user-info'> <img src='/uploads/avatar/" + objList[i].author.avatar + "' /><p class='comment-username'>" + objList[i].author.username + "</p></div><div id='comment-content'> <p id='comment-text'>" + objList[i].content + "</p></div> </li>");
+						if(objList[i].author.avatar == "default.png"){
+							var avatar = "/images/defaultAvatar.png"
+						}
+						else{
+							var avatar = "/uploads/avatar/" + objList[i].author.avatar;
+						}
+						$("#comment-list").append("<li class='clearfix'><div id='comment-user-info'> <img src='" + avatar + "' /><p class='comment-username'>" + objList[i].author.username + "</p></div><div id='comment-content'> <p id='comment-text'>" + objList[i].content + "</p></div> </li>");
+
 						i++;
 					}
 					page++;

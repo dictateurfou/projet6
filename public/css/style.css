@@ -394,6 +394,41 @@ header a:visited{
 /*end trick edit*/
 
 
+#phone-menu{
+	position: fixed;
+	top:0em;
+	width:100%;
+	background-color:#fff;
+	z-index:998;
+	display:none;
+}
+
+
+#phone-trigger-menu{
+	position: fixed;
+	top:0em;
+	border:none;
+	font-size:2em;
+	display:none;
+	z-index:999;
+}
+
+#phone-menu li{
+	width:100%;
+	text-align:center;
+	border-bottom:1px solid black;
+}
+
+#phone-menu li:last-child{
+	border-bottom:none;
+}
+
+#phone-menu a{
+	color:black;
+}
+
+
+
 
 /* responsive */
 	@media only screen and (max-width: 1200px) {
@@ -479,5 +514,21 @@ header a:visited{
 		}
 
 	}
+
+	@media only screen and (max-width: 500px) {
+		#menu{
+			display:none;
+		}
+
+		#phone-trigger-menu{
+			display:block;
+		}
+
+		#trick-header-title{
+			font-size:3em;
+		}
+
+	}
+
 
 /* */
