@@ -14,28 +14,27 @@
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     </head>
     <body>
-         {% include 'header.html.twig' %}
+        <section id="notif">
+            <ul id="notif-list">
+                
+            </ul>
+        </section>
 
-         {% block body %}{% endblock %}
+        {% include 'header.html.twig' %}
 
-         {% block javascripts %}{% endblock %}
+        {% block body %}{% endblock %}
+
+        {% block javascripts %}{% endblock %}
+
+        <script src="{{asset('js/general.js')}}"></script>
         <script>
-            var mobileMenuOpen = false;
-            $( "#phone-trigger-menu" ).click(function() {
-              openMenu();
+            $(document).ready(function() {
+                {% for message in app.flashes('test') %}
+                    var notif = JSON.parse("{{message|escape('js')}}");
+                    createNotif(notif);
+
+                {% endfor %}
             });
-
-            function openMenu(){
-               if(mobileMenuOpen == false){
-                  mobileMenuOpen = true;
-                  $("#phone-menu").show();
-               }
-               else{
-                  mobileMenuOpen = false;
-                  $("#phone-menu").hide();
-               }
-            }
-
         </script>
     </body>
 </html>

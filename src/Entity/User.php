@@ -8,7 +8,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="Un compte existe déja avec cet email")
+ * @UniqueEntity(fields={"email"},message="this mail is already taken")
+ * @UniqueEntity(fields={"username"},message="this username is already taken")
  */
 class User implements UserInterface
 {
@@ -36,7 +37,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 

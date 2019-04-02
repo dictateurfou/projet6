@@ -48,7 +48,6 @@ class RegistrationController extends AbstractController
                         ->setTo($user->getEmail())
                         ->setBody(
                             $this->renderView(
-                                // templates/emails/registration.html.twig
                                 'email/linkValidation.html.twig',
                                 ['token' => $token]
                             ),
@@ -58,7 +57,6 @@ class RegistrationController extends AbstractController
 
             $mailer->send($message);
 
-            /*dd($token);*/
             return $this->redirectToRoute('app_login');
         }
 
