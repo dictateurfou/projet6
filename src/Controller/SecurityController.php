@@ -128,6 +128,9 @@ class SecurityController extends AbstractController
 
             $user->setPassword($newPassword);
             $em->persist($user);
+            
+            $em->persist($passwordRequest);
+            $em->remove($passwordRequest);
             $em->flush();
             $this->addFlash('notification', json_encode(["message" => "Your changes were saved!","type" => "info"]));
             return $this->redirectToRoute('app_login');

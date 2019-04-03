@@ -64,6 +64,8 @@ class User implements UserInterface
     {
         $this->uploadedAvatar = $img;
         $this->uploadFile();
+        /*set uploadedAvatar at null for fix Serialization of 'Symfony\Component\HttpFoundation\File\UploadedFile' is not allowed*/
+        $this->uploadedAvatar = null;
 
         return $this;
     }
@@ -190,8 +192,6 @@ class User implements UserInterface
                     $this->deleteFile($fileName);
                 }
                 $this->avatar = $newFileName;
-                /*set uploadedAvatar at null for fix Serialization of 'Symfony\Component\HttpFoundation\File\UploadedFile' is not allowed*/
-                $this->uploadedAvatar = null;
             } catch (FileException $e) {
             }
         }

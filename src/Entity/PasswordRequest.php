@@ -17,7 +17,7 @@ class PasswordRequest
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"},fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"},fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

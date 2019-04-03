@@ -273,26 +273,7 @@ header a:visited{
 	text-align: center;
 }
 
-/*form trick*/
-#add-trick{
-	width:20em;
-	margin:0 auto;
-	margin-top:1em;
-	background-color:black;
-	text-align:center;
-}
 
-#add-trick label{
-	width:100%;
-	display:block;
-	text-align:center;
-	color:#fff;
-}
-
-#add-trick input{
-	text-align:center;
-}
-/*end form add-trick*/
 
 
 /*comment*/

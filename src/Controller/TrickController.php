@@ -87,8 +87,19 @@ class TrickController extends AbstractController
             $file = $trick->getImageList();
             $data = $form->getData();
             $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
-            $entityManager->persist($trick);
 
+            //check upload
+            $i = 0;
+            while ($i < count($trick->getImageList())) {
+                if (null === $trick->getImageList()[$i]->getName()) {
+                    $trick->removeImageList($trick->getImageList()[$i]);
+                    $this->addFlash("notification", json_encode(["message" => "an error occuring when upload file , format accepted png and jpeg","type" => "error"]));
+                    return $this->redirectToRoute('accueil');
+                }
+                $i++;
+            }
+
+            $entityManager->persist($trick);
             $entityManager->flush();
             $form = $this->createForm(TrickType::class, $trick);
             $this->addFlash("notification", json_encode(["message" => "your trick has been added","type" => "info"]));
