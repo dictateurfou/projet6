@@ -10,8 +10,12 @@ swiftmailer:
     password: YOUPASSWORD
     spool: { type: 'memory' }
 
-3)open you console
+3)open you console.
+
 4)type : composer install
+
 5) type : php bin/console doctrine:schema:update --force
+
 6) type: php bin/console doctrine:fixtures:load
+
 7) launch you app : php bin/console s:run
