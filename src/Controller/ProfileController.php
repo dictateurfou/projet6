@@ -73,7 +73,7 @@ class ProfileController extends AbstractController
             if (true == $actualPassword) {
                 $user->setPassword($newPassword);
                 $em->persist($user);
-                $em->flush(); 
+                $em->flush();
                 $this->addFlash("notification", json_encode(["message" => "Your changes were saved!","type" => "info"]));
             } else {
                 $this->addFlash("notification", json_encode(["message" => "Your password is incorrect","type" => "error"]));

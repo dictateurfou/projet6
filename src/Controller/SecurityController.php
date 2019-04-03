@@ -72,14 +72,13 @@ class SecurityController extends AbstractController
             //$data["username"]
             if (!$user) {
                 $this->addFlash("notification", json_encode(["message" => "this user does not exist","type" => "error"]));
-            }
-            else{
+            } else {
                 $user = $user[0];
 
                 $checkPasswordRequest = $this->getDoctrine()
                 ->getRepository(PasswordRequest::class)
                 ->findBy(['user' => $user]);
-                if(!$checkPasswordRequest){
+                if (!$checkPasswordRequest) {
                     $token = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
                     $passwordRequest = new PasswordRequest();
                     $passwordRequest->setToken($token);
@@ -87,8 +86,7 @@ class SecurityController extends AbstractController
                     $passwordRequest->setUser($user);
                     $em->persist($passwordRequest);
                     $em->flush();
-                }
-                else{
+                } else {
                     $token = $checkPasswordRequest[0]->getToken();
                 }
 
