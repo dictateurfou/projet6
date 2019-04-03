@@ -29,7 +29,7 @@
         <script src="{{asset('js/general.js')}}"></script>
         <script>
             $(document).ready(function() {
-                {% for message in app.flashes('test') %}
+                {% for message in app.flashes('notification') %}
                     var notif = JSON.parse("{{message|escape('js')}}");
                     createNotif(notif);
 

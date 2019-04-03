@@ -458,6 +458,33 @@ header a:visited{
 
 /*end notif*/
 
+#general-form{
+	width:20em;
+	margin:0 auto;
+	margin-top:1em;
+	border:1px solid black;
+	text-align:center;
+}
+
+#general-form #title-form{
+	font-size:1.5em;
+	text-decoration: underline;
+}
+
+#general-form label{
+	width:100%;
+	display:block;
+	text-align:center;
+}
+
+#general-form input{
+	text-align:center;
+}
+
+#general-form button{
+	margin-top:1em;
+}
+
 /* responsive */
 	@media only screen and (max-width: 1200px) {
 		#trick-list li{

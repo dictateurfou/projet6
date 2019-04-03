@@ -3,10 +3,9 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-	<div id="title-form">
-    	<h1>Register</h1>
-    </div>
-    <div id="register">
+
+	<div id="general-form">
+    	<p id="title-form">Register</p>
 	    {{ form_start(registrationForm) }}
 	        {{ form_row(registrationForm.email) }}
 	        {{ form_row(registrationForm.username) }}

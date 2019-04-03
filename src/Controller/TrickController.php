@@ -91,7 +91,7 @@ class TrickController extends AbstractController
 
             $entityManager->flush();
             $form = $this->createForm(TrickType::class, $trick);
-
+            $this->addFlash("notification", json_encode(["message" => "your trick has been added","type" => "info"]));
             return $this->redirectToRoute('accueil');
         }
 

@@ -27,7 +27,7 @@ function createNotif(notif){
         var elem = $('<li>', {class:notif.type,style:"display:none",text:message});
     }
     else{
-       var elem = $('<li>', {class:'message',style:"display:none",text:message}); 
+       var elem = $('<li>', {class:'info',style:"display:none",text:message}); 
     }
     
     
