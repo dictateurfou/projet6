@@ -183,7 +183,7 @@ class User implements UserInterface
     {
         $targetDirectory = dirname(__DIR__).'/../public/uploads/avatar';
         $valid = $this->checkValidMimeType($this->uploadedAvatar->getMimeType());
-        if (true == $valid) {
+        if (true === $valid) {
             $fileName = $this->avatar;
             $newFileName = md5(uniqid()).'.'.$this->uploadedAvatar->guessExtension();
             try {
