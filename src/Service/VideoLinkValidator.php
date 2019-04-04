@@ -26,7 +26,7 @@ class VideoLinkValidator
     private function checkEmbed($url)
     {
         $embed = false;
-        if (true == strpos($url, 'embed')) {
+        if (true === strpos($url, 'embed')) {
             $embed = true;
         }
 
@@ -52,7 +52,7 @@ class VideoLinkValidator
             }
         }
 
-        if (false == $videoLink) {
+        if (false === $videoLink) {
             return $url;
         } else {
             return $videoLink;
@@ -73,7 +73,7 @@ class VideoLinkValidator
         if (1 == count($linkExplode)) {
             $videoLink = false;
         }
-        if (false == $videoLink) {
+        if (false === $videoLink) {
             return false;
         } else {
             return $videoLink;
@@ -91,11 +91,11 @@ class VideoLinkValidator
                     $result = $url;
                     $embed = $this->checkEmbed($url);
                     if ('youtube' == $key) {
-                        if (false == $embed) {
+                        if (false === $embed) {
                             $result = $this->convertYoutubeUrl($url);
                         }
                     } elseif ('dailymotion' == $key) {
-                        if (false == $embed) {
+                        if (false === $embed) {
                             $result = $this->convertDailymotionUrl($url);
                         }
                     }
