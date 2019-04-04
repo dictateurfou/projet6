@@ -63,7 +63,6 @@ class ProfileController extends AbstractController
         $form = $this->createForm(UserChangePasswordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
             $actualPassword = $passwordEncoder->isPasswordValid($user, $form->get('plainLastPassword')->getData());
             $newPassword = $passwordEncoder->encodePassword(
                 $user,
