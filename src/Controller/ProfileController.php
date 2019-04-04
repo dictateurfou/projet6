@@ -70,7 +70,7 @@ class ProfileController extends AbstractController
                 $form->get('plainNewPassword')->getData()
             );
 
-            if (true == $actualPassword) {
+            if (true === $actualPassword) {
                 $user->setPassword($newPassword);
                 $em->persist($user);
                 $em->flush();

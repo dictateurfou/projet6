@@ -50,9 +50,7 @@ class UserChangePasswordType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('valider', SubmitType::class, array('label' => 'Valider'))
-
-        ;
+            ->add('valider', SubmitType::class, array('label' => 'Valider'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

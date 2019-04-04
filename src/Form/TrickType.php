@@ -45,8 +45,7 @@ class TrickType extends AbstractType
                     'attr' => array('class' => 'videoList-box'),
                 ),
             ))
-            ->add('valider', SubmitType::class, array('label' => 'Valider'))
-        ;
+            ->add('valider', SubmitType::class, array('label' => 'Valider'));
     }
 
     public function configureOptions(OptionsResolver $resolver)
