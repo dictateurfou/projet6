@@ -78,7 +78,7 @@ class Image
         dump('test');
         $targetDirectory = dirname(__DIR__).'/../public/uploads/trick';
         $valid = $this->checkValidMimeType($this->file->getMimeType());
-        if (true == $valid) {
+        if (true === $valid) {
             $fileName = $this->name;
             $newFileName = md5(uniqid()).'.'.$this->file->guessExtension();
             try {
