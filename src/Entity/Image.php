@@ -112,7 +112,7 @@ class Image
         $targetDirectory = dirname(__DIR__).'/../public/uploads/trick';
         $myFile = $targetDirectory.'/'.$name;
         if (file_exists($myFile)) {
-            unlink($myFile)
+            unlink($myFile);
         }
     }
 }
