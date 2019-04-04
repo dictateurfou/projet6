@@ -75,9 +75,8 @@ class VideoLinkValidator
         }
         if (false === $videoLink) {
             return false;
-        } else {
-            return $videoLink;
         }
+        return $videoLink;
     }
 
     private function checkValidUrl($url)
