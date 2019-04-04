@@ -83,7 +83,7 @@ class VideoLinkValidator
     {
         $result = false;
         $i = 0;
-        foreach (array_keys(self::AVAILABLEURL) as $key) {
+        foreach (self::AVAILABLEURL as $key => $value) {
             $e = 0;
             while (count(self::AVAILABLEURL[$key]) > $e) {
                 if (strpos($url, self::AVAILABLEURL[$key][$e])) {
