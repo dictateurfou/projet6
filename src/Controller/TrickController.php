@@ -85,7 +85,6 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $trick->getImageList();
-            $data = $form->getData();
             $trick->setVideoList($videoLinkvalidator->checkUrl($trick->getVideoList()));
 
             //check upload
