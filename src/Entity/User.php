@@ -217,7 +217,7 @@ class User implements UserInterface
         $targetDirectory = dirname(__DIR__).'/../public/uploads/avatar';
         $myFile = $targetDirectory.'/'.$name;
         if (file_exists($myFile)) {
-            unlink($myFile) or die("Couldn't delete file");
+            unlink($myFile)
         }
     }
 }

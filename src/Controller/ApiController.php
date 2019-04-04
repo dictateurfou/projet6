@@ -21,7 +21,7 @@ class ApiController extends AbstractController
     public function getConversation($trickid, $page = null)
     {
         $repositoryComment = $this->getDoctrine()->getRepository(Discussion::class);
-        if (null == $page) {
+        if (null === $page) {
             $commentsList = $repositoryComment->findWithPagination($trickid, 1);
         } else {
             $commentsList = $repositoryComment->findWithPagination($trickid, $page);
@@ -47,7 +47,7 @@ class ApiController extends AbstractController
     public function getTricks($page = null)
     {
         $repositoryTrick = $this->getDoctrine()->getRepository(Trick::class);
-        if (null == $page) {
+        if (null === $page) {
             $trickList = $repositoryTrick->findWithPagination(1);
         } else {
             $trickList = $repositoryTrick->findWithPagination($page);
