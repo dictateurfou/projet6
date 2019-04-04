@@ -55,7 +55,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/passwordedit", name="edit_pass")
      */
-    public function editPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function editPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $em = $this->getDoctrine()->getManager();
