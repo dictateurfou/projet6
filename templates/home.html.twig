@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 	<section id="home-header">
-			<h1>La référence des tricks de snowboard</h1>
+			<h1>The reference of snowboard tricks</h1>
 	</section>
 
 	<section id="trick-list">
@@ -28,8 +28,6 @@
 				success : function(objList, statut){
 					objList = JSON.parse(objList);
 					var i = 0;
-					console.log(objList);
-					console.log(objList.length);
 
 					while(i < objList.length){
 						var link = $('<a>',{href:"/trick/view/" + objList[i].id +"",})
@@ -51,8 +49,6 @@
 					$(".trick-edit").click(function(){
 						var id = $(this).data('id');
 						window.location.replace("/trick/edit/" + id + "");
-
-						console.log("trick edit call");
 					});
 
 					$(".trick-delete").click(function(){
@@ -62,7 +58,6 @@
 						  window.location.replace("/trick/remove/" + id + "");
 						}
 
-						console.log("trick edit call");
 					});
 					page++;
 

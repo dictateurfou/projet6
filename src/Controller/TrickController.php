@@ -16,7 +16,6 @@ use App\Service\VideoLinkValidator;
 class TrickController extends AbstractController
 {
     /**
-     * Page d'info d'un trick.
      *
      * @Route("/view/{trickId}", name="view")
      */
@@ -50,7 +49,6 @@ class TrickController extends AbstractController
     }
 
     /**
-     * Page d'info d'un trick.
      *
      * @Route("/remove/{trick}", name="remove")
      */
@@ -64,7 +62,6 @@ class TrickController extends AbstractController
     }
 
     /**
-     * Page d'ajout d'un trick.
      *
      * @Route("/add", name="add")
      */
@@ -109,7 +106,6 @@ class TrickController extends AbstractController
     }
 
     /**
-     * Page d'ajout d'un trick.
      *
      * @Route("/edit/{trick}", name="edit")
      */

@@ -15,7 +15,7 @@ class UserAvatarType extends AbstractType
     {
         $builder
             ->add('uploadedAvatar', FileType::class, array('required' => true, 'label' => false))
-            ->add('valider', SubmitType::class, array('label' => 'Valider'))
+            ->add('Validate', SubmitType::class, array('label' => 'Validate'))
         ;
     }
 

@@ -27,9 +27,9 @@
 		<section id="trick-additionalInfo">
 	    	<ul>
 	    		<li class="trick-group">{{trick.getCategory().getName()}}</li>
-	    		<li class="trick-date">créer le {{trick.getCreatedAt()|date('Y-m-d h:m')}}</li>
+	    		<li class="trick-date">created at {{trick.getCreatedAt()|date('Y-m-d h:m')}}</li>
 	    		{% if trick.getEdited == 'yes' %}
-    				<li class="trick-date">éditer le {{trick.getEditedAt()|date('Y-m-d h:m')}}</li>
+    				<li class="trick-date">Edited at {{trick.getEditedAt()|date('Y-m-d h:m')}}</li>
 				{% endif %}
 	    	</ul>
 	    </section>

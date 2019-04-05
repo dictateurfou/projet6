@@ -13,7 +13,7 @@ class ForgotPasswordType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('valider', SubmitType::class, array('label' => 'Valider'))
+            ->add('Validate', SubmitType::class, array('label' => 'Validate'))
         ;
     }
 

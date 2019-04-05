@@ -33,7 +33,7 @@
 	      
 	      	 <button type="button"
 	        class="add-another-collection-widget"
-	        data-list="#videoList-fields-list">Ajouter une autre video</button>
+	        data-list="#videoList-fields-list">Add another video</button>
 
 	      
 	        	{{ form_label(form.imageList) }}
@@ -58,7 +58,7 @@
 			    
 	   		 <button type="button"
 	        class="add-another-collection-widget"
-	        data-list="#imageList-fields-list">Ajouter une autre image</button>
+	        data-list="#imageList-fields-list">Add another image</button>
 	        
 				{{form_row(form.name)}}
 				{{form_row(form.description)}}
@@ -84,7 +84,6 @@ function reorderImage(){
 
 	li.each(function( index ) {	
 		var lastId = $(this).attr('id');
-		console.log("ok");
 		$(this).attr('id',index);
 		$("#trick_imageList_" + lastId).attr('id',"trick_imageList_" + index);
 		/*hidden input*/
@@ -103,7 +102,6 @@ function reorderVideo(){
 	var li = $("#videoList-fields-list li");
 	li.each(function( index ) {	
 		var lastId = $(this).attr('id');
-		console.log("passe");
 		$(this).attr('id',index);
 		$("#trick_videoList_" + lastId).attr("id","trick_videoList_" + index);
 		$("#trick_videoList_" + index).attr('name',"trick[videoList][" + index + "]");
@@ -122,16 +120,12 @@ function checkIfEmbed(link){
 }
 
 function onChangeVideoLink(){
-	console.log($(this).val());
 	var link = $(this).val();
 	var embed = checkIfEmbed($(this).val());
-	console.log("embed = " + embed);
 	var website = verifLinkDomain(link);
-	console.log("domain" + website);
 	if(embed == false && website != false){
 		var id = $(this).attr('id').slice(-1);
 		var newLink = convertLinkToEmbed(link,website);
-		console.log("newLink = " + newLink);
 		$("#videoList-fields-list #" + id + " iframe").attr("src",newLink);
 		
 	}
@@ -152,7 +146,6 @@ function verifLinkDomain(link){
 			i++;
 		}
 		if(know == true){
-			console.log("know = true" + " urlSite = " + urlSite);
 			return urlSite;
 		}
 	}
@@ -180,7 +173,6 @@ function convertLinkToEmbed(link,website){
 	}
 	else{
 		var urlSplit = link.split("/");
-		console.log(urlSplit);
 		if(website == "youtube"){
 			var video = urlSplit[3];
 		}
@@ -227,7 +219,6 @@ jQuery(document).ready(function () {
 				reorderVideo();
 			}
 		}
-		console.log("ok");
 	});
 
     jQuery('.add-another-collection-widget').click(function (e) {
@@ -248,7 +239,6 @@ jQuery(document).ready(function () {
 
         // create a new list element and add it to the list
         var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
-        console.log(newElem.attr("id",counter-1));
         newElem.appendTo(list);
     });
 });

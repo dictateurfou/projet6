@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class ImageType extends AbstractType
 {
@@ -16,6 +17,8 @@ class ImageType extends AbstractType
         $builder
             ->add('name', HiddenType::class, array('required' => false))
             ->add('file', FileType::class, array('required' => true, 'label' => false))
+ 
+
         ;
     }
 

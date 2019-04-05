@@ -18,11 +18,11 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'Nom'))
+            ->add('name', TextType::class, array('label' => 'Name'))
             ->add('description', TextareaType::class, array('label' => 'Description'))
             ->add('category', EntityType::class, array('class' => Category::class,
                 'choice_label' => 'getName',
-                'placeholder' => 'Categorie', 'label' => 'Categorie', ))
+                'placeholder' => 'category', 'label' => 'Category', ))
             ->add('imageList', CollectionType::class, array(
                 'entry_type' => ImageType::class,
                 'allow_add' => true,
@@ -45,7 +45,7 @@ class TrickType extends AbstractType
                     'attr' => array('class' => 'videoList-box'),
                 ),
             ))
-            ->add('valider', SubmitType::class, array('label' => 'Valider'));
+            ->add('Validate', SubmitType::class, array('label' => 'Validate'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

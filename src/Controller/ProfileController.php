@@ -18,7 +18,7 @@ class ProfileController extends AbstractController
      */
     public function index(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+       
         $user = $this->getUser();
         $form = $this->createForm(UserAvatarType::class, $user, [
             'action' => $this->generateUrl('profile_edit_avatar'),
@@ -36,12 +36,12 @@ class ProfileController extends AbstractController
      */
     public function editAvatar(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+       
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $form = $this->createForm(UserAvatarType::class, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $test = $form->get('uploadedAvatar')->getData();
             $em->persist($user);
@@ -57,7 +57,7 @@ class ProfileController extends AbstractController
      */
     public function editPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $form = $this->createForm(UserChangePasswordType::class);

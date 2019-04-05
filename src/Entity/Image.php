@@ -75,7 +75,7 @@ class Image
 
     private function uploadFile()
     {
-        dump('test');
+       
         $targetDirectory = dirname(__DIR__).'/../public/uploads/trick';
         $valid = $this->checkValidMimeType($this->file->getMimeType());
         if (true === $valid) {
