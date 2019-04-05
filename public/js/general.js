@@ -41,7 +41,6 @@ function createNotif(notif){
     
     list.append(elem);
     elem.animate({width: "toggle",height: "toggle" }, 500).delay(time).animate({top:"-=500"},500, function() {
-        console.log("anim complete");
         elem.remove();
     });
 
