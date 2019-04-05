@@ -129,6 +129,8 @@ class TrickController extends AbstractController
             $trick->setEditedAt($date);
             $entityManager->flush();
             $form = $this->createForm(TrickType::class, $trick);
+            $this->addFlash("notification", json_encode(["message" => "your trick is save","type" => "info"]));
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('trick/edit.html.twig', ['form' => $form->createView(), 'trick' => $trick]);
